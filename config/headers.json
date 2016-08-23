@@ -1,0 +1,10 @@
+{
+  "get" : {"ContentType" :
+                              {"value" : "application/json;charset=utf-8",
+                                "name" : "Content-Type"},
+           "Authorization" :
+                              {"jwt" : "",
+                               "basic" : "",
+                               "name" : "Authorization"}
+           }
+}

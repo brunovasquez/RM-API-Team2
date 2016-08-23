@@ -1,0 +1,29 @@
+{
+  "roomManagerCredentials":{
+                            "username" :  "admin",
+                            "password" :  "control123!@#"},
+  "domainCredentials":{
+                        "username" :  "administrator",
+                        "password" :  "control"},
+  "rootURI" :  "https://10.31.161.150",
+  "port" : "4040",
+  "exchange" : {"username" : "administrator",
+    "password" : "control",
+    "hostname" : "SRMOCDC01.JALRM002.LAB"},
+  "typeAuthentication": {"jwt" : "jwt ",
+    "basic" : "Basic"},
+
+  "endPoints" : { "publicKey" : "/public-key",
+    "login" : "/login",
+    "serviceTypes" : "/service-types",
+    "resources" : "/resources",
+    "services" : "/services",
+    "rooms" : "/rooms",
+    "meetings" : "/meetings",
+    "outOfOrders" : "/out-of-orders",
+    "locations" : "/locations",
+    "attendees" : "/attendees"
+  },
+  "timeSlow": 10000,
+  "timeOut": 10000
+}

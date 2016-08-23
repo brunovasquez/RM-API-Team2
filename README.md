@@ -1,2 +1,1 @@
-# RM-API-Team2
-Existent framewor
+# QADEV06-RM-API

@@ -1,0 +1,13 @@
+{
+  "url":"mongodb://10.31.161.150:27017/roommanager",
+  "tables":
+  {
+	"location":"locations",
+	"resource":"resourcemodels",
+	"service":"services",
+	"room":"rooms",
+	"outoforders":"outoforders",
+	"attendees":"serviceaccounts",
+	"meeting":"meetings"
+  }
+}
