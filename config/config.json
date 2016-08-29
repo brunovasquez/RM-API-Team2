@@ -1,15 +1,17 @@
 {
   "roomManagerCredentials":{
-                            "username" :  "admin",
-                            "password" :  "control123!@#"},
+                            "username" :  "group2\\administrator",
+                            "password" :  "P@ssw0rd",
+                            "authentication" : "ldap"},
   "domainCredentials":{
                         "username" :  "administrator",
-                        "password" :  "control"},
-  "rootURI" :  "https://10.31.161.150",
+                        "password" :  "P@ssw0rd"},
+
+  "rootURI" :  "https://192.168.1.11",
   "port" : "4040",
   "exchange" : {"username" : "administrator",
-    "password" : "control",
-    "hostname" : "SRMOCDC01.JALRM002.LAB"},
+    "password" : "P@ssw0rd",
+    "hostname" : "WIN-TK2EE0ERQKM.group2.local"},
   "typeAuthentication": {"jwt" : "jwt ",
     "basic" : "Basic"},
 
