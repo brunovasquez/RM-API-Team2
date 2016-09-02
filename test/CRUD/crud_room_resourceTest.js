@@ -92,16 +92,12 @@ describe("CRUD - Room Resources Service", function(){
     });
 
     it('DEL /rooms/{:roomId}/resources/{:roomResourceId} removes a specific resource from a specific room', function(done){
-        var found = false;
+        //var found = false;
         request.resource.delResourceByRoom(room_ID, roomResourceId, function(err, res){
             var resourcesList = res.body.resources;
             (resourcesList instanceof Array)? found = false : resourcesList = [];
-            resourcesList.forEach(function(elementResource){
-                if (elementResource._id == roomResourceId){
-                    found=true;
-                }
-            });
-            expect(found).to.equal(false);
+            var found = resourcesList.filter(elementResource => elementResource._id == roomResourceId);
+            expect(found).to.be.empty;
             done();
         });
     });

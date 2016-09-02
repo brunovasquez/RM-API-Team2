@@ -1,0 +1,16 @@
+{
+  "logger":{
+          "appenders":[
+                  {"type":"file", "filename":"./logs/room-manager.log", "category": "attendee"},
+                  {"type":"file", "filename":"/logs/room-manager.log", "category": "location"},
+                  {"type":"file", "filename":"/logs/room-manager.log", "category": "meetings"},
+                  {"type":"file", "filename":"/logs/room-manager.log", "category": "outOfOrder"},
+                  {"type":"file", "filename":"/logs/room-manager.log", "category": "resource"},
+                  {"type":"file", "filename":"/logs/room-manager.log", "category": "room_resource"},
+                  {"type":"file", "filename":"/logs/room-manager.log", "category": "room"},
+                  {"type":"file", "filename":"/logs/room-manager.log", "category": "service_room_resource"},
+                  {"type":"file", "filename":"./logs/room-manager.log", "category": "service"}
+          ]
+  }
+
+}
