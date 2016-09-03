@@ -6,14 +6,15 @@ var config = require('../../config/config.json');
 
 describe("Smoke: Service - Feature", function(){
 
-    this.slow(10000);
-    this.timeout(10000);
+    this.slow(config.timeSlow);
+    this.timeout(config.timeOut);
     var serviceId;
     var serviceIdPost;
 
     before(function(done){
         request.authentication.postLogin(function(err, res){
             dbQuery.preCondition.findAllServices(function(res){
+                
                 serviceId = res[0]._id;
                 done();
             });

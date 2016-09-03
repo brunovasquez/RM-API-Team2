@@ -92,7 +92,6 @@ describe("CRUD - Room Resources Service", function(){
     });
 
     it('DEL /rooms/{:roomId}/resources/{:roomResourceId} removes a specific resource from a specific room', function(done){
-        //var found = false;
         request.resource.delResourceByRoom(room_ID, roomResourceId, function(err, res){
             var resourcesList = res.body.resources;
             (resourcesList instanceof Array)? found = false : resourcesList = [];
