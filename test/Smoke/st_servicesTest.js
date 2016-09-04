@@ -14,7 +14,6 @@ describe("Smoke: Service - Feature", function(){
     before(function(done){
         request.authentication.postLogin(function(err, res){
             dbQuery.preCondition.findAllServices(function(res){
-                
                 serviceId = res[0]._id;
                 done();
             });
@@ -26,21 +25,21 @@ describe("Smoke: Service - Feature", function(){
         var serviceType = generator.generator_service.getType();
         request.services.postService(serviceType.exchange, body, function(err, res){
             serviceIdPost = res.body._id;
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('GET /services, returns status code 200', function(done){
         request.services.getServices(function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('GET /services/{:serviceId}, returns status code 200', function(done){
         request.services.getServiceById(serviceId, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
@@ -48,14 +47,14 @@ describe("Smoke: Service - Feature", function(){
     it('GET /services?type={service type}, returns status code 200', function(done){
         var serviceType = generator.generator_service.getType();
         request.services.getServiceByType(serviceType.exchange, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('DEL /services/{:serviceId}, returns status code 200', function(done){
         request.services.delService(serviceIdPost, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
