@@ -90,8 +90,6 @@ describe("CRUD: for API Meetings", function(){
 
         it('PUT /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, modifies the specified meeting', function(done){
             var meetingBody = generator.generator_meeting.generateMeeting(room);
-            console.log(serviceId+'   '+roomId+'  '+meetingId);
-            console.log(meetingBody);
             request.meeting.putMeeting(serviceId, roomId, meetingId, meetingBody, function(err, res){
                 var actualResult = res.body;
                 dbQuery.assertion.verifyMeetingExist(res.body._id, function(result){

@@ -35,7 +35,6 @@ var storeResources= function(resource){
     resources.associations.push(resource);
 };
 var getResourcesList= function(){
-    console.log("lista json  "+listResource);
     return listResource.id;
 };
 exports.getResourcesList = getResourcesList;

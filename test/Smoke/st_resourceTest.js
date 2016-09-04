@@ -57,7 +57,6 @@ describe("Smoke: Resource - Feature", function(){
     it('POST /services/{:serviceId}/rooms/{:roomId}/resources, returns status code 200', function(done){
         var body = generator.generator_resource.generateResource();
         generator.generator_resource.setPropertiesResource(resourceId);
-        console.log(body);
         request.resource.postResourceByRoomOfService(body, serviceId, room_ID, function(err, res){
             expect(res.status).to.equal(config.statusCode.OK);
             done();
