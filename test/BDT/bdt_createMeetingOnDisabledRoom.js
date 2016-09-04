@@ -60,7 +60,7 @@ describe('Feature: Meeting API', function(){
 	    });
 
 	    it('Then the meeting is rejected',function(done){
-	    	expect(requestStatus).to.not.equal(200);
+	    	expect(requestStatus).to.not.equal(config.statusCode.OK);
 	    	done();
 	    });
 

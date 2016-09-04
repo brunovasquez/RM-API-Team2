@@ -74,7 +74,7 @@ describe('Scenario1 for Meeting API', function(){
 	    });
 
 	    it('Then the second meeting is rejected',function(done){
-	    	expect(requestStatus).to.not.equal(200);
+	    	expect(requestStatus).to.not.equal(config.statusCode.OK);
 	    	done();
 	    });
 
