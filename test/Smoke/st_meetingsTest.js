@@ -38,7 +38,7 @@ describe("Meetings - Feature without creating meetings like precondition", funct
                 serviceId = res[0]._id;
                 request.meeting.postMeeting(serviceId, roomId, meetingBody, function(err, res){
                     meetingId = res.body._id;
-                    expect(res.status).to.equal(200);
+                    expect(res.status).to.equal(config.statusCode.OK);
                     done();
                 });
             });
@@ -63,14 +63,14 @@ describe("Meetings - Feature without creating meetings like precondition", funct
 
         it('GET /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function(done){
             request.meeting.getMeetingById(serviceId, roomId, meetingId, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
 
         it('GET /services/{:serviceId}/rooms/{:roomId}/meetings, returns status code 200', function(done){
             request.meeting.getMeetings(serviceId, roomId, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
@@ -78,7 +78,7 @@ describe("Meetings - Feature without creating meetings like precondition", funct
         it('PUT /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function(done){
             var meetingBody = generator.generator_meeting.generateMeeting(room);
             request.meeting.putMeeting(serviceId, roomId, meetingId, meetingBody, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
@@ -86,7 +86,7 @@ describe("Meetings - Feature without creating meetings like precondition", funct
         it('DELETE /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function(done){
             request.meeting.delMeeting(serviceId, roomId, meetingId, function(err, res){
                 meetingId = undefined;
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });

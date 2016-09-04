@@ -5,7 +5,6 @@ var dbQuery = require('../../lib/Conditions/dbQuery.js');
 var config = require('../../config/config.json');
 
 describe("Smoke: Room Resources - Feature", function(){
-
     this.slow(config.timeSlow);
     this.timeout(config.timeOut);
     var roomId;
@@ -44,14 +43,14 @@ describe("Smoke: Room Resources - Feature", function(){
 
     it('GET /rooms/{:roomId}/resources/{:roomResourceId}, returns status code 200', function(done){
         request.resource.getResourceByRoomId(roomId, roomResourceId, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('GET /services/{:serviceId}/rooms/{:roomId}/resources/{:roomResourceId}, returns status code 200', function(done){
         request.resource.getResourceByRoomOfService(serviceId, roomId, roomResourceId, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
@@ -59,7 +58,7 @@ describe("Smoke: Room Resources - Feature", function(){
    it('PUT /rooms/{:roomId}/resources/{:roomResourceId}, returns status code 200', function(done){
         var body = {"quantity": generator.generateCapacity()};
         request.resource.putResourceByRoom(roomId, roomResourceId, body, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
@@ -67,24 +66,22 @@ describe("Smoke: Room Resources - Feature", function(){
     it('PUT /services/{:serviceId}/rooms/{:roomId}/resources/{:roomResourceId}, returns status code 200', function(done){
         var body = {"quantity": generator.generateCapacity()};
         request.resource.putResourceByRoomOfService(serviceId, roomId, roomResourceId, body, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('DEL /rooms/{:roomId}/resources/{:roomResourceId}, returns status code 200', function(done){
         request.resource.delResourceByRoom(roomId, roomResourceId, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('DEL /services/{:serviceId}/rooms/{:roomId}/resources/{:roomResourceId}, returns status code 200', function(done){
         request.resource.delResourceByRoomOfService(serviceId, roomId, roomResourceId, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
-
-
 });

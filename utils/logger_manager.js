@@ -11,8 +11,10 @@ exports.defineModule = function (module) {
 }
 
 exports.log = function (err) {
+
     if(err!=null) {
         logModule.error(err.response.error);
     }
 
 }
+

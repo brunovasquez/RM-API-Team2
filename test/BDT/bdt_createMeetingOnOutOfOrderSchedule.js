@@ -50,6 +50,7 @@ describe('Feature: Meeting API', function(){
 				dbQuery.preCondition.findAllRoomsOfOneService(serviceId, function(res){
 					room = res[0];
 					roomId = res[0]._id;
+					console.log(roomId);
 					var complementUrl = "?active=true&email=true";
 					var outOfOrderBody = generator.generator_outOfOrder.generateOutOfOrder(roomId);
 					startDate = outOfOrderBody.from;
@@ -75,7 +76,7 @@ describe('Feature: Meeting API', function(){
 	    });
 
 	    it('Then the meeting is rejected',function(done){
-	    	expect(requestStatus).to.not.equal(200);
+	    	expect(requestStatus).to.not.equal(config.statusCode.OK);
 	    	done();
 	    });
 

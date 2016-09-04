@@ -19,8 +19,6 @@ describe("CRUD: for API Meetings", function(){
         });
     });
 
-    
-
     afterEach(function(done){
         if (meetingId !== undefined) {
             request.meeting.delMeeting(serviceId, roomId, meetingId, function(err, res){
@@ -92,7 +90,9 @@ describe("CRUD: for API Meetings", function(){
 
         it('PUT /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, modifies the specified meeting', function(done){
             var meetingBody = generator.generator_meeting.generateMeeting(room);
-            request.meeting.putMeeting(serviceId, roomId, meetingId, meetingBody, function(err, res){       
+            console.log(serviceId+'   '+roomId+'  '+meetingId);
+            console.log(meetingBody);
+            request.meeting.putMeeting(serviceId, roomId, meetingId, meetingBody, function(err, res){
                 var actualResult = res.body;
                 dbQuery.assertion.verifyMeetingExist(res.body._id, function(result){
                     expect(result.title).to.equal(actualResult.title);
