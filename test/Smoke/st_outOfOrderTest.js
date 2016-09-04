@@ -41,7 +41,7 @@ describe("Out Of Order - Feature without creating out of order like precondition
         var outOfOrderBody = generator.generator_outOfOrder.generateOutOfOrder(roomId);
             request.outOfOrders.postOutOfOrder(serviceId, roomId, outOfOrderBody, complementUrl, function(err, res){
             outOfOrderId = res.body._id;
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
@@ -58,21 +58,21 @@ describe("Out Of Order - Feature without creating out of order like precondition
 
         it('GET /out-of-orders/{:outOfOrderId}, returns status code 200', function(done){
             request.outOfOrders.getOutOfOrderById(outOfOrderId, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
 
         it('GET /services/{:serviceId}/rooms/{:roomId}/out-of-orders, returns status code 200', function(done){
             request.outOfOrders.getOutOfOrderByRoom(serviceId, roomId, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
 
         it('GET /services/{:serviceId}/rooms/{:roomId}/out-of-orders/{:outOfOrderId}, returns status code 200', function(done){
             request.outOfOrders.getOutOfOrderByRoom(serviceId, roomId, outOfOrderId, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
@@ -81,14 +81,14 @@ describe("Out Of Order - Feature without creating out of order like precondition
             var complementUrl = "?active=true&email=true";
             var outOfOrderBody = {"title": "OutOfOrder Edited"};
             request.outOfOrders.putOutOfOrder(serviceId, roomId, outOfOrderId, outOfOrderBody, complementUrl, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
 
         it('DEL /services/{:serviceId}/rooms/{:roomId}/out-of-orders/{:outOfOrderId}, returns status code 200', function(done){
             request.outOfOrders.delOutOfOrder(serviceId, roomId, outOfOrderId, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 flagDeleted = true;
                 done();
             });
