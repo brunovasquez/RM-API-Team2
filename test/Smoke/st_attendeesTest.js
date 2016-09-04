@@ -22,7 +22,7 @@ describe("Smoke: Room Resources - Feature", function(){
     it('GET /services/{:serviceId}/attendees{?filter}/, returns status code 200', function(done){
         var filter = generator.generateValue();
         request.services.getAttendeesByService(serviceId, filter, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });

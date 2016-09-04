@@ -56,21 +56,15 @@ describe("CRUD: methods for API-Room", function(){
         dbQuery.preCondition.findAllRoomsOfOneService(serviceId,function(res){
             roomsServiceListExpected = res;
             request.room.getRoomsByService(serviceId, function(err, res){
-                var found =false, totalFound = 0;
+                var totalFound = 0;
                 var roomServiceResult =res.body;
-                (roomServiceResult instanceof Array)? found = false : roomServiceResult = [];
-                roomServiceResult.forEach(function(elementNow){
-                    roomsServiceListExpected.forEach(function(elementExpect){
-                        if (elementNow._id == elementExpect._id &&
-                            elementNow.emailAddress == elementExpect.emailAddress &&
-                            elementNow.displayName == elementExpect.displayName &&
-                            elementNow.serviceId == elementExpect.serviceId){
-                            found = true;
-                        }
-                    });
-                    if (found){
-                        totalFound ++;
-                    }
+
+                roomServiceResult.forEach(elementNow =>
+                {totalFound += roomsServiceListExpected.filter(elementExpect =>
+                    elementNow._id == elementExpect._id &&
+                    elementNow.emailAddress == elementExpect.emailAddress &&
+                    elementNow.displayName == elementExpect.displayName &&
+                    elementNow.serviceId == elementExpect.serviceId).length
                 });
                 expect(totalFound).to.equal(roomsServiceListExpected.length);
                 expect(roomServiceResult.length).to.equal(roomsServiceListExpected.length);

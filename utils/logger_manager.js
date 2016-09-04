@@ -11,11 +11,9 @@ exports.defineModule = function (module) {
 }
 
 exports.log = function (err) {
-    //logModule.debug(method + " " + endpoint);
 
     if(err!=null) {
-        logModule.error(err.status);
-        logModule.error(err.response);
+        logModule.error(err.response.error);
     }
 
 }

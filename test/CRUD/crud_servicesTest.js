@@ -70,11 +70,11 @@ describe('CRUD: methods for API-Services ', function(){
 
     it('DEL /services/{:serviceId} delete the service specified', function(done){
         request.services.delService(serviceIdPost, function(err, res){
-            dbQuery.assertion.verifyLocationExist(res.body._id, function(result){
+            dbQuery.assertion.verifyServiceExist(res.body._id, function(result){
                 expect(undefined).to.equal(result);
                 done();
             });
         });
     });
-    
+
 });

@@ -9,9 +9,10 @@
   "author": "LARA",
   "license": "ISC",
   "dependencies": {
-    "mocha": "^2.4.5",
     "chai": "^3.5.0",
     "isodate": "^0.1.4",
+    "log4js": "^0.6.38",
+    "mocha": "^2.4.5",
     "mongodb": "^2.1.11",
     "superagent": "^1.8.1",
     "superagent-proxy": "^1.0.0"
