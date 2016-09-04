@@ -51,6 +51,14 @@ describe("Smoke: Service - Feature", function(){
             done();
         });
     });
+    
+    it('PUT /services/{service type}, returns status code 200', function(done){
+        var body = { impersonate: true};
+        request.services.putService(serviceId, body, function(err, res){
+            expect(res.status).to.equal(config.statusCode.OK);
+            done();
+        });
+    });
 
     it('DEL /services/{:serviceId}, returns status code 200', function(done){
         request.services.delService(serviceIdPost, function(err, res){
