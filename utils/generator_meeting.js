@@ -6,23 +6,22 @@ var start = new Date();
 var end = new Date (Date.now() + 60000);
 var email =  config.exchange.hostname.replace(config.exchange.hostname.split('.')[0]+".", "@")  ;
 var meeting = {
-  "organizer": "User",
-  "title": "meetingTitle",
-  "start": "2015-03-05T23:00:00.000Z",
-  "end": "2015-03-05T23:30:00.000Z",
-  "location": "Room 102",
-  "roomEmail": "room102@myexchange.com",
+  "organizer": "",
+  "title": "",
+  "start": "",
+  "end": "",
+  "location": "",
+  "roomEmail": "",
   "resources": [
-    "room102@myexchange.com"
+    ""
   ],
   "attendees": [
-    "User@myexchange.com"
-  ],
-  "optionalAttendees":["User@myexchange.com"]
+    ""],
+  "optionalAttendees":[""]
 }
 ;
 var generateMeeting = function(room){
-    meeting.organizer = config.domainCredentials.username;
+    meeting.organizer = config.roomManagerCredentials.username;
     meeting.title = generator.generateValues();
     meeting.start = start.toISOString();
     meeting.end = end.toISOString();

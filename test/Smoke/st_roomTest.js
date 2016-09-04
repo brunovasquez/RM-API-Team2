@@ -27,7 +27,7 @@ describe("Smoke: Rooms - Feature", function(){
 
     it('GET /rooms, returns status code 200', function(done){
         request.room.getRoom(function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
      });
@@ -35,28 +35,28 @@ describe("Smoke: Rooms - Feature", function(){
     it('GET /rooms/{:roomId}, returns 404 status code when non-existent roomId is used', function(done){
         var nonExistentRoomId = generator.generateValues();
         request.room.getRoomById(nonExistentRoomId, function(err, res){
-            expect(res.status).to.equal(404);
+            expect(res.status).to.equal(config.statusCode.NOT_FOUND);
             done();
         });
     });
 
     it('GET /rooms/{:roomId}, returns status code 200', function(done){
         request.room.getRoomById(roomId, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('GET /services/{:serviceId}/rooms, returns status code 200', function(done){
         request.room.getRoomsByService(serviceId, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('GET /services/{:serviceId}/rooms/{:roomId}, returns status code 200', function(done){
         request.room.getRoomByService(serviceId, roomId, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
@@ -64,7 +64,7 @@ describe("Smoke: Rooms - Feature", function(){
     it('PUT /rooms/{:roomId}, returns status code 200', function(done){
         var body = generator.generator_room.generateRoom();
         request.room.putRoom(roomId, body, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
@@ -73,7 +73,7 @@ describe("Smoke: Rooms - Feature", function(){
         var body = generator.generator_room.generateRoom();
         var nonExistentRoomId = generator.generateValues();
         request.room.putRoom(nonExistentRoomId, body, function(err, res){
-            expect(res.status).to.equal(404);
+            expect(res.status).to.equal(config.statusCode.NOT_FOUND);
             done();
         });
     });
@@ -81,7 +81,7 @@ describe("Smoke: Rooms - Feature", function(){
     it('PUT /rooms/{:roomId}, returns status code 401 when an incorrect authorization is used', function(done){
         var body = generator.generator_room.generateRoom();
         request.room.putRoomIncorrectAuthorization(roomId, body, function(err, res){
-            expect(res.status).to.equal(401);
+            expect(res.status).to.equal(config.statusCode.UNAUTHORIZED);
             done();
         });
     });
@@ -89,7 +89,7 @@ describe("Smoke: Rooms - Feature", function(){
     it('PUT /services/{:serviceId}/rooms/{:roomId}, returns status code 200', function(done){
         var body = generator.generator_room.generateRoom();
         request.room.putRoomByService(serviceId, roomId, body, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
