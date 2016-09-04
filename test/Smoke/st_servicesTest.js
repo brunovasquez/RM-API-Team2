@@ -20,7 +20,7 @@ describe("Smoke: Service - Feature", function(){
         });
     });
 
-    it('POST /services, returns status code 200', function(done){
+    it.skip('POST /services, returns status code 200', function(done){
         var body = config.exchange;
         var serviceType = generator.generator_service.getType();
         request.services.postService(serviceType.exchange, body, function(err, res){
@@ -60,7 +60,7 @@ describe("Smoke: Service - Feature", function(){
         });
     });
 
-    it('DEL /services/{:serviceId}, returns status code 200', function(done){
+    it.skip('DEL /services/{:serviceId}, returns status code 200', function(done){
         request.services.delService(serviceIdPost, function(err, res){
             expect(res.status).to.equal(config.statusCode.OK);
             done();

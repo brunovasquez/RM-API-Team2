@@ -20,7 +20,7 @@ describe('CRUD: methods for API-Services ', function(){
         });
     });
 
-    it('POST /services?type={service type}  creates a new service', function(done){
+    it.skip('POST /services?type={service type}  creates a new service', function(done){
         var body = config.exchange;
         var serviceType = generator.generator_service.getType();
         request.services.postService(serviceType.exchange, body, function(err, res){
