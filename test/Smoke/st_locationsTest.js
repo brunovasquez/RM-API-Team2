@@ -35,7 +35,7 @@ describe("Smoke: Locations  - Feature", function(){
     it('POST /locations, returns status code 200', function(done){
         bodyLocation = generator.generator_location.generateLocation();
         request.location.postLocation(bodyLocation, function(err, res){
-                expect(res.status).to.equal(200);
+                expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
     });
@@ -43,21 +43,21 @@ describe("Smoke: Locations  - Feature", function(){
     it('POST /locations, returns status code 401 when an incorrect authorization is used', function(done){
         bodyLocation = generator.generator_location.generateLocation();
         request.location.postLocationIncorrectAuthorization(bodyLocation, function(err, res){
-            expect(res.status).to.equal(401);
+            expect(res.status).to.equal(config.statusCode.UNAUTHORIZED);
             done();
         });
     });
 
     it('GET /locations, returns status code 200', function(done){
         request.location.getLocations(function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
 
     it('GET /locations/{:locationId }, returns status code 200', function(done){
         request.location.getLocationById(locationID, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
@@ -65,7 +65,7 @@ describe("Smoke: Locations  - Feature", function(){
     it('GET /locations/{:locationId }, returns status code 404 when a non-existent location Id is used', function(done){
         var nonExistentLocationID = generator.generateValues();
         request.location.getLocationById(nonExistentLocationID, function(err, res){
-            expect(res.status).to.equal(404);
+            expect(res.status).to.equal(config.statusCode.NOT_FOUND);
             done();
         });
     });
@@ -73,7 +73,7 @@ describe("Smoke: Locations  - Feature", function(){
     it('PUT /A specific location, returns status code 200', function(done){
         var body = generator.generator_location.generateLocation();
         request.location.putLocation(locationID, body, function(err, res){
-            expect(res.status).to.equal(200);
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
