@@ -50,7 +50,6 @@ describe('Feature: Meeting API', function(){
 				dbQuery.preCondition.findAllRoomsOfOneService(serviceId, function(res){
 					room = res[0];
 					roomId = res[0]._id;
-					console.log(roomId);
 					var complementUrl = "?active=true&email=true";
 					var outOfOrderBody = generator.generator_outOfOrder.generateOutOfOrder(roomId);
 					startDate = outOfOrderBody.from;
