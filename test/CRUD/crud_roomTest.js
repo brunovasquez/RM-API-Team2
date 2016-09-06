@@ -3,6 +3,7 @@ var request = require('../../lib/RequestManager/manager.js');
 var generator = require('../../utils/generator.js');
 var dbQuery = require('../../lib/Conditions/dbQuery.js');
 var config = require('../../config/config.json');
+var helper = require('../../utils/helper.js');
 
 describe("CRUD: methods for API-Room", function(){
 
@@ -56,16 +57,8 @@ describe("CRUD: methods for API-Room", function(){
         dbQuery.preCondition.findAllRoomsOfOneService(serviceId,function(res){
             roomsServiceListExpected = res;
             request.room.getRoomsByService(serviceId, function(err, res){
-                var totalFound = 0;
                 var roomServiceResult =res.body;
-
-                roomServiceResult.forEach(elementNow =>
-                {totalFound += roomsServiceListExpected.filter(elementExpect =>
-                    elementNow._id == elementExpect._id &&
-                    elementNow.emailAddress == elementExpect.emailAddress &&
-                    elementNow.displayName == elementExpect.displayName &&
-                    elementNow.serviceId == elementExpect.serviceId).length
-                });
+                var totalFound = helper.compareArrays(roomServiceResult,roomsServiceListExpected);
                 expect(totalFound).to.equal(roomsServiceListExpected.length);
                 expect(roomServiceResult.length).to.equal(roomsServiceListExpected.length);
                 done();
