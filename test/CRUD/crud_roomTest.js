@@ -58,7 +58,7 @@ describe("CRUD: methods for API-Room", function(){
             roomsServiceListExpected = res;
             request.room.getRoomsByService(serviceId, function(err, res){
                 var roomServiceResult =res.body;
-                var totalFound = helper.compareArrays(roomServiceResult,roomsServiceListExpected);
+                var totalFound = helper.compareRoomService(roomServiceResult,roomsServiceListExpected);
                 expect(totalFound).to.equal(roomsServiceListExpected.length);
                 expect(roomServiceResult.length).to.equal(roomsServiceListExpected.length);
                 done();
