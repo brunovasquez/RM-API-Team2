@@ -2,8 +2,7 @@ var generator = require('../utils/generator.js');
 var room = {
     "customDisplayName": "",
     "code": "",
-    "capacity": "",
-    "locationId": ""
+    "capacity": ""
 };
 var generateRoomWithLocation = function(locationId){
     room.customDisplayName = generator.generateValues();
