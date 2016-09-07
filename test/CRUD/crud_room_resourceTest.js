@@ -3,6 +3,7 @@ var request = require('../../lib/RequestManager/manager.js');
 var generator = require('../../utils/generator.js');
 var dbQuery = require('../../lib/Conditions/dbQuery.js');
 var config = require('../../config/config.json');
+var helper = require('../../utils/helper.js');
 
 describe("CRUD - Room Resources Service", function () {
 
@@ -42,7 +43,7 @@ describe("CRUD - Room Resources Service", function () {
     it('GET /rooms/{:roomId}/resources returns all room\'s resources by room Id', function (done) {
         request.resource.getResourcesByRoom(room_ID, function (err, res) {
             expect(totalResources).to.equal(res.body.length);
-            var present = res.body.filter(element => resourceList.filter(dbElement => (element.resourceId == dbElement.resourceId && element.quantity == dbElement.quantity)));
+            var present = res.body.filter(element => helper.compareResourceByResourceId(resourceList,element.resourceId));
             expect(totalResources).to.equal(present.length);
             done();
         });
@@ -61,8 +62,8 @@ describe("CRUD - Room Resources Service", function () {
         var bodyJSON = {"quantity": quantity};
         request.resource.putResourceByRoom(room_ID, roomResourceId, bodyJSON, function (err, res) {
             var resourcesList = res.body.resources;
-            var found = resourcesList.filter(elementResource=>elementResource.resourceId == roomResourceId);
-            expect(found[0].quantity).to.equal(parseInt(quantity));
+            var found = helper.compareResourceByResourceId(resourcesList, roomResourceId);
+            expect(found.shift().quantity).to.equal(parseInt(quantity));
             done();
         });
     });
@@ -71,9 +72,9 @@ describe("CRUD - Room Resources Service", function () {
         var found = false;
         request.resource.delResourceByRoom(room_ID, roomResourceId, function (err, res) {
             var resourcesList = res.body.resources;
-            (resourcesList instanceof Array) ? found = false : resourcesList = [];
-            resourcesList.forEach(elementResource=>{(elementResource._id == roomResourceId)?found=true:null});
-            expect(found).to.equal(false);
+            (resourcesList instanceof Array) ? found = [] : resourcesList = [];
+            found = helper.compareResourceById(resourcesList, roomResourceId);
+            expect(found).to.empty;
             done();
         });
     });
@@ -83,9 +84,9 @@ describe("CRUD - Room Resources Service", function () {
         generator.generator_resource.setPropertiesResource(roomResourceId);
         request.resource.postResourceByRoomId(resourceJSON, room_ID2, function (err, res) {
             var resourcesList = res.body.resources;
-            (resourcesList instanceof Array) ? found = false : resourcesList = [];
-            var found = resourcesList.filter(elementResource =>elementResource.resourceId == roomResourceId && elementResource.quantity == (parseInt(resourceJSON.quantity)));
-            expect(found[0].resourceId).to.equal(""+roomResourceId);
+            (resourcesList instanceof Array) ? found = [] : resourcesList = [];
+            var found = helper.compareResourceByResourceId(resourcesList, roomResourceId);
+            expect(found.shift().resourceId).to.equal(roomResourceId.toString());
             done();
         });
 
