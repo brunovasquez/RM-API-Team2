@@ -117,7 +117,6 @@ describe("CRUD - Out of Orders - Feature without creating out of order like prec
                 dbQuery.assertion.findOutOfOrderById(outOfOrderId, function (resultExpected) {
                     var from = new Date(resultExpected.from);
                     var to = new Date(resultExpected.to);
-                    console.log(resultExpected.body + '   expected!')
                     expect(actualResult._id == resultExpected._id).to.equal(true);
                     expect(actualResult.roomId == resultExpected.roomId).to.equal(true);
                     expect(actualResult.title == resultExpected.title).to.equal(true);

@@ -3,13 +3,13 @@ var request = require('../../lib/RequestManager/manager.js');
 var generator = require('../../utils/generator.js');
 var config = require('../../config/config.json');
 
-describe("Smoke: Public Key - Feature", function(){
+describe("Smoke: Service Types - Feature", function(){
     this.slow(config.timeSlow);
     this.timeout(config.timeOut);
 
-    it('GET /public key, returns status code 200', function(done){
-        request.publicKey.getPublicKey(function(err, res){
-            expect(res.status).to.equal(200);
+    it('GET /service-types, returns status code 200', function(done){
+        request.serviceTypes.getServiceTypes(function(err, res){
+            expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });

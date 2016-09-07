@@ -59,7 +59,6 @@ describe("CRUD - Room Resources Service", function () {
     it('PUT /rooms/{:roomId}/resources/{:roomResourceId} updates a specific resource from a specific room', function (done) {
         var quantity = generator.generateCapacity();
         var bodyJSON = {"quantity": quantity};
-        console.log(quantity);
         request.resource.putResourceByRoom(room_ID, roomResourceId, bodyJSON, function (err, res) {
             var resourcesList = res.body.resources;
             var found = resourcesList.filter(elementResource=>elementResource.resourceId == roomResourceId);
