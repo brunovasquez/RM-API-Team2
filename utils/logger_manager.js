@@ -12,9 +12,8 @@ exports.defineModule = function (module) {
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     }
-    else{
-        logModule = logger.getLogger(module);
-    }
+    logModule = logger.getLogger(module);
+
 }
 
 exports.log = function (err) {
