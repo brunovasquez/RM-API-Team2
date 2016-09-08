@@ -3,6 +3,7 @@ var request = require('../../lib/RequestManager/manager.js');
 var generator = require('../../utils/generator.js');
 var dbQuery = require('../../lib/Conditions/dbQuery.js');
 var config = require('../../config/config.json');
+var helper = require('../../utils/helper.js');
 
 describe("CRUD - Attendees Service", function(){
 
@@ -29,10 +30,8 @@ describe("CRUD - Attendees Service", function(){
             var accountListActual = res.body;
             dbQuery.postCondition.findAttendeesByService(serviceId,filter,function(res){
                 var accountListExpected = res;
-                var totalPresent = 0;
-                accountListActual.forEach(accountActual =>
-                    totalPresent = accountListExpected.filter(accountExpected => accountExpected.dn == accountActual.dn).length
-                );
+                var totalPresent = helper.countTotalPresentAttendAndService(accountListExpected, accountListActual);
+         
                 expect(totalPresent).to.equal(accountListExpected.length);
                 expect(accountListActual.length).to.equal(accountListExpected.length);
                 done();

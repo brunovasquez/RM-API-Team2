@@ -52,7 +52,7 @@ var compareResources = function (resourcesListResponse, resourceListBdD) {
             element.resourceId == dbElement.resourceId && element.quantity == dbElement.quantity).length;
     });
     return amountPresents;
-}
+};
 exports.compareResources = compareResources;
 
 /**
@@ -65,7 +65,7 @@ exports.compareResources = compareResources;
 var compareResourceById = function (resourcesList, roomResourceId) {
     return resourcesList.filter(elementResource =>
     elementResource._id == roomResourceId);
-}
+};
 exports.compareResourceById = compareResourceById;
 
 
@@ -79,6 +79,23 @@ exports.compareResourceById = compareResourceById;
 var compareResourceByResourceId = function (resourcesList, roomResourceId) {
     return resourcesList.filter(elementResource =>
     elementResource.resourceId == roomResourceId);
-}
+};
 exports.compareResourceByResourceId = compareResourceByResourceId;
+
+
+/**
+ * This function is used to count of the attended for account
+ * @param accountListExpected Is the list to compare
+ * @param accountListActual Is the list to compare
+ * @returns totalPresent is the total coincidences
+ */
+var countTotalPresentAttendAndService = function (accountListExpected, accountListActual) {
+    var totalPresent = 0;
+    accountListActual.forEach(accountActual => totalPresent = accountListExpected.filter(accountExpected => accountExpected.dn == accountActual.dn).length
+    );
+    return totalPresent;
+};
+exports.countTotalPresentAttendAndService = countTotalPresentAttendAndService;
+
+
 

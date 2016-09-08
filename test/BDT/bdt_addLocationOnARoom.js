@@ -16,7 +16,7 @@ var config = require('../../config/config.json');
 
 
 describe('Feature: Location API', function(){
-    context('Scenario: Create a new Location', function(){
+    context('Scenario: Add a Location in a Room', function(){
 
         this.slow(config.timeSlow);
         this.timeout(config.timeOut);
