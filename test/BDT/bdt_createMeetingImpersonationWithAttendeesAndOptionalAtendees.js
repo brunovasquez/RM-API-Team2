@@ -33,6 +33,8 @@ describe("Feature: Meeting API", function () {
        var room;
        var meetingBody;
        var meetingResponse;
+       this.slow(config.timeSlow);
+       this.timeout(config.timeOut);
        before(function(done){
            var filter = "a";
            request.authentication.postLogin(function(err, res){
@@ -63,7 +65,6 @@ describe("Feature: Meeting API", function () {
        it("And I have the impersonation enabled",function (done) {
            var body = {"impersonate":true};
            request.services.putService(serviceId, body, function(err, res){
-               console.log(res.body);
                done();
            });
        });
@@ -76,7 +77,6 @@ describe("Feature: Meeting API", function () {
        it("When I have a meeting on behalf of 'Account_1' specifying the 'Account_2'",function () {
            meetingBody = generator.generator_meeting.generateMeeting(room);
            meetingBody.organizer = account1;
-           console.log(meetingBody.organizer);
        });
 
        it("And it is specified the meeting's title as 'Crazy party'",function () {
@@ -96,7 +96,6 @@ describe("Feature: Meeting API", function () {
        it("And create the meeting with all the specifications",function (done) {
            request.meeting.postImpersonateMeeting(serviceId, room._id, meetingBody, function(err, res){
                meetingResponse = res.body;
-               console.log(meetingResponse);
                done();
            });
        });

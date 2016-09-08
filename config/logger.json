@@ -9,7 +9,8 @@
                   {"type":"file", "filename":"./logs/room-manager.log", "category": "room_resource"},
                   {"type":"file", "filename":"./logs/room-manager.log", "category": "room"},
                   {"type":"file", "filename":"./logs/room-manager.log", "category": "service_room_resource"},
-                  {"type":"file", "filename":"./logs/room-manager.log", "category": "service"}
+                  {"type":"file", "filename":"./logs/room-manager.log", "category": "service"},
+                  {"type":"file", "filename":"./logs/room-manager.log", "category": "service-types"}
           ]
   }
 
