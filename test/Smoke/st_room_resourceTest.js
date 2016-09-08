@@ -15,19 +15,16 @@ describe("Smoke: Room Resources - Feature", function(){
 
     before(function(done){
         request.authentication.postLogin(function(err, res){
-            done();
-        });
-    });
-    before(function(done){
-        var resourceBody = generator.generator_resource.generateResource();
-        request.resource.postResource(resourceBody, function(err, res){
-            resource_ID = res.body._id;
-            generator.generator_resource.setPropertiesResource(resource_ID);
-            dbQuery.preCondition.findAllRooms(function(res){
-                roomId = res[0]._id;
-                dbQuery.preCondition.findAllServices(function(res){
-                    serviceId = res[0]._id;
-                    done();
+            var resourceBody = generator.generator_resource.generateResource();
+            request.resource.postResource(resourceBody, function(err, res){
+                resource_ID = res.body._id;
+                generator.generator_resource.setPropertiesResource(resource_ID);
+                dbQuery.preCondition.findAllRooms(function(res){
+                    roomId = res[0]._id;
+                    dbQuery.preCondition.findAllServices(function(res){
+                        serviceId = res[0]._id;
+                        done();
+                    });
                 });
             });
         });
