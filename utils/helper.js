@@ -29,7 +29,7 @@ var compareResources = function (resourcesListResponse, resourceListBdD) {
             element.resourceId == dbElement.resourceId && element.quantity == dbElement.quantity).length;
     });
     return amountPresents;
-}
+};
 exports.compareResources = compareResources;
 
 /**
@@ -42,7 +42,7 @@ exports.compareResources = compareResources;
 var compareResourceById = function (resourcesList, roomResourceId) {
     return resourcesList.filter(elementResource =>
     elementResource._id == roomResourceId);
-}
+};
 exports.compareResourceById = compareResourceById;
 
 
@@ -56,5 +56,21 @@ exports.compareResourceById = compareResourceById;
 var compareResourceByResourceId = function (resourcesList, roomResourceId) {
     return resourcesList.filter(elementResource =>
     elementResource.resourceId == roomResourceId);
-}
+};
 exports.compareResourceByResourceId = compareResourceByResourceId;
+
+
+/**
+ * This function is used to find the resource that have an specific resourceId
+ * @param resourcesList Is the list where is going to fin coincidences
+ * @param roomResourceId I the resourceId for compare
+ * @returns {Array|Cursor|*|Array.<T>|{_id}|{PSEUDO, CHILD, ID, TAG, CLASS, ATTR, POS}}
+ * The list of all elements that have coincidences with the resourceId sent
+ */
+var countTotalPresentAttendAndService = function (accountListExpected, accountListActual) {
+    var totalPresent = 0;
+    accountListActual.forEach(accountActual => totalPresent = accountListExpected.filter(accountExpected => accountExpected.dn == accountActual.dn).length
+    );
+    return totalPresent;
+};
+exports.countTotalPresentAttendAndService = countTotalPresentAttendAndService;
