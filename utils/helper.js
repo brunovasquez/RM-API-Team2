@@ -61,11 +61,10 @@ exports.compareResourceByResourceId = compareResourceByResourceId;
 
 
 /**
- * This function is used to find the resource that have an specific resourceId
- * @param resourcesList Is the list where is going to fin coincidences
- * @param roomResourceId I the resourceId for compare
- * @returns {Array|Cursor|*|Array.<T>|{_id}|{PSEUDO, CHILD, ID, TAG, CLASS, ATTR, POS}}
- * The list of all elements that have coincidences with the resourceId sent
+ * This function is used to count of the attended for account
+ * @param accountListExpected Is the list to compare
+ * @param accountListActual Is the list to compare
+ * @returns totalPresent is the total coincidences
  */
 var countTotalPresentAttendAndService = function (accountListExpected, accountListActual) {
     var totalPresent = 0;
