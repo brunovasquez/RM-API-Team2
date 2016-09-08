@@ -49,10 +49,10 @@ describe("CRUD - Room Resources Service", function () {
         });
     });
 
-    it('GET /rooms/{:roomId}/resources/{:roomResourceId} returns a specific resource from a specific room', function (done) {
+    it.only('GET /rooms/{:roomId}/resources/{:roomResourceId} returns a specific resource from a specific room', function (done) {
         request.resource.getResourceByRoomId(room_ID, roomResourceId, function (err, res) {
-            expect(resourceBody.resourceId == res.body.resourceId).to.equal(true);
-            expect(resourceBody.quantity == res.body.quantity).to.equal(true);
+            expect(resourceBody.resourceId.toString()).to.eql(res.body.resourceId);
+            expect(resourceBody.quantity).to.equal(res.body.quantity.toString());
             done();
         });
     });

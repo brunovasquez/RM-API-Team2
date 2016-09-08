@@ -1,10 +1,9 @@
 {
   "name": "RoomManager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "simple rest api automation",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
   },
   "author": "LARA",
   "license": "ISC",
@@ -15,7 +14,6 @@
     "mocha": "^2.4.5",
     "mongodb": "^2.1.11",
     "superagent": "^1.8.1",
-    "superagent-proxy": "^1.0.0",
     "xunit-file": "^1.0.0"
   }
 }
