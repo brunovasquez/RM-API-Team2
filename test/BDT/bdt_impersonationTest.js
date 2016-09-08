@@ -42,12 +42,12 @@ describe("Given I have the 'Use Room Manager Impersonation' option checked", fun
             expect(room._id).not.equal(undefined);
         });
     });
-    context("When I create a meeting for 'User1' as organizer with Lucero's account", function(){
+    context("When I create a meeting for 'User1' as organizer with Administrators's account", function(){
         before(function(done){
             var roomId = room._id;
             meetingBody = generator.generator_meeting.generateMeeting(room);
             meetingBody.organizer = "User1";
-            config.domainCredentials.username = "Lucero";
+            config.domainCredentials.username = "administrator";
             request.meeting.postImpersonateMeeting(serviceId, roomId, meetingBody, function(err, res){
                organizer = res.body.organizer;
                 done();

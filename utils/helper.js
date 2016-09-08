@@ -13,6 +13,7 @@ var compareRoomService = function (roomServiceResult, roomsServiceListExpected) 
         elementNow.serviceId == elementExpect.serviceId).length
     });
     return totalFound;
+
 };
 exports.compareRoomService = compareRoomService;
 /**
@@ -34,3 +35,50 @@ var compareAllOutOfOrders = function (actualResult, resultExpected) {
     return totalPresents;
 };
 exports.compareAllOutOfOrders=compareAllOutOfOrders;
+
+
+exports.compareRoomService = compareRoomService;
+
+/**
+ * This function is used to do the corresponding validation given two list of resources from a room
+ * @param resourcesListResponse resources list from the endpoint
+ * @param resourceListBdD resources list from the database
+ */
+var compareResources = function (resourcesListResponse, resourceListBdD) {
+    var amountPresents = 0;
+    resourcesListResponse.forEach(element =>{
+        amountPresents +=
+            resourceListBdD.filter(dbElement =>
+            element.resourceId == dbElement.resourceId && element.quantity == dbElement.quantity).length;
+    });
+    return amountPresents;
+}
+exports.compareResources = compareResources;
+
+/**
+ * This function is used to find the resource that have an specific Id
+ * @param resourcesList Is the list where is going to fin coincidences
+ * @param roomResourceId I the Id for compare
+ * @returns {Array|Cursor|*|Array.<T>|{_id}|{PSEUDO, CHILD, ID, TAG, CLASS, ATTR, POS}}
+ * The list of all elements that have coincidences with the id sent
+ */
+var compareResourceById = function (resourcesList, roomResourceId) {
+    return resourcesList.filter(elementResource =>
+    elementResource._id == roomResourceId);
+}
+exports.compareResourceById = compareResourceById;
+
+
+/**
+ * This function is used to find the resource that have an specific resourceId
+ * @param resourcesList Is the list where is going to fin coincidences
+ * @param roomResourceId I the resourceId for compare
+ * @returns {Array|Cursor|*|Array.<T>|{_id}|{PSEUDO, CHILD, ID, TAG, CLASS, ATTR, POS}}
+ * The list of all elements that have coincidences with the resourceId sent
+ */
+var compareResourceByResourceId = function (resourcesList, roomResourceId) {
+    return resourcesList.filter(elementResource =>
+    elementResource.resourceId == roomResourceId);
+}
+exports.compareResourceByResourceId = compareResourceByResourceId;
+
