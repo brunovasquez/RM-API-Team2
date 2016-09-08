@@ -38,7 +38,7 @@ describe('CRUD: methods for API-Locations', function(){
         });
     });
 
-    describe('', function(){
+    describe('CRUD methods for API-Locations that require a create locations', function(){
 
         beforeEach(function(done){
             var randomLocation = generator.generator_location.generateLocation();

@@ -4,7 +4,7 @@ var generator = require('../../utils/generator.js');
 var dbQuery = require('../../lib/Conditions/dbQuery.js');
 var config = require('../../config/config.json');
 
-describe("Meetings - Feature without creating meetings like precondition", function(){
+describe("Meetings - Feature without creating meetings like precondition", function () {
 
     this.slow(config.timeSlow);
     this.timeout(config.timeOut);
@@ -13,30 +13,30 @@ describe("Meetings - Feature without creating meetings like precondition", funct
     var serviceId;
     var meetingId;
 
-    before(function(done){
-        request.authentication.postLogin(function(err, res){
+    before(function (done) {
+        request.authentication.postLogin(function (err, res) {
             done();
         });
     });
 
-    afterEach(function(done){
+    afterEach(function (done) {
         if (meetingId !== undefined) {
-            request.meeting.delMeeting(serviceId, roomId, meetingId, function(err, res){
+            request.meeting.delMeeting(serviceId, roomId, meetingId, function (err, res) {
                 done();
             });
-        }else{
+        } else {
             done();
         }
     });
 
-    it('POST /services/{:serviceId}/rooms/{:roomId}/meetings', function(done){
-        dbQuery.preCondition.findAllRooms(function(res){
+    it('POST /services/{:serviceId}/rooms/{:roomId}/meetings', function (done) {
+        dbQuery.preCondition.findAllRooms(function (res) {
             room = res[0];
             roomId = res[0]._id;
             var meetingBody = generator.generator_meeting.generateMeeting(room);
-            dbQuery.preCondition.findAllServices(function(res){
+            dbQuery.preCondition.findAllServices(function (res) {
                 serviceId = res[0]._id;
-                request.meeting.postMeeting(serviceId, roomId, meetingBody, function(err, res){
+                request.meeting.postMeeting(serviceId, roomId, meetingBody, function (err, res) {
                     meetingId = res.body._id;
                     expect(res.status).to.equal(config.statusCode.OK);
                     done();
@@ -45,15 +45,15 @@ describe("Meetings - Feature without creating meetings like precondition", funct
         });
     });
 
-    describe('Meetings - Feature creating meetings like precondition', function(){
-        beforeEach(function(done){
-            dbQuery.preCondition.findAllRooms(function(res){
+    describe('Meetings - Feature creating meetings like precondition', function () {
+        beforeEach(function (done) {
+            dbQuery.preCondition.findAllRooms(function (res) {
                 room = res[0];
                 roomId = res[0]._id;
                 var meetingBody = generator.generator_meeting.generateMeeting(room);
-                dbQuery.preCondition.findAllServices(function(res){
+                dbQuery.preCondition.findAllServices(function (res) {
                     serviceId = res[0]._id;
-                    request.meeting.postMeeting(serviceId, roomId, meetingBody, function(err, res){
+                    request.meeting.postMeeting(serviceId, roomId, meetingBody, function (err, res) {
                         meetingId = res.body._id;
                         done();
                     });
@@ -61,30 +61,30 @@ describe("Meetings - Feature without creating meetings like precondition", funct
             });
         });
 
-        it('GET /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function(done){
-            request.meeting.getMeetingById(serviceId, roomId, meetingId, function(err, res){
+        it('GET /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function (done) {
+            request.meeting.getMeetingById(serviceId, roomId, meetingId, function (err, res) {
                 expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
 
-        it('GET /services/{:serviceId}/rooms/{:roomId}/meetings, returns status code 200', function(done){
-            request.meeting.getMeetings(serviceId, roomId, function(err, res){
+        it('GET /services/{:serviceId}/rooms/{:roomId}/meetings, returns status code 200', function (done) {
+            request.meeting.getMeetings(serviceId, roomId, function (err, res) {
                 expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
 
-        it('PUT /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function(done){
+        it('PUT /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function (done) {
             var meetingBody = generator.generator_meeting.generateMeeting(room);
-            request.meeting.putMeeting(serviceId, roomId, meetingId, meetingBody, function(err, res){
+            request.meeting.putMeeting(serviceId, roomId, meetingId, meetingBody, function (err, res) {
                 expect(res.status).to.equal(config.statusCode.OK);
                 done();
             });
         });
 
-        it('DELETE /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function(done){
-            request.meeting.delMeeting(serviceId, roomId, meetingId, function(err, res){
+        it('DELETE /services/{:serviceId}/rooms/{:roomId}/meetings/{:meetingId}, returns status code 200', function (done) {
+            request.meeting.delMeeting(serviceId, roomId, meetingId, function (err, res) {
                 meetingId = undefined;
                 expect(res.status).to.equal(config.statusCode.OK);
                 done();
