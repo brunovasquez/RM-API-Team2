@@ -1,14 +1,11 @@
 /*
- Feature: Meeting API
+ Feature: Resource API
 
- Scenario: Create a new Meeting on a disabled Room
+ Scenario: Create a new Resource on a disabled Room
  Given a disabled room
- When I create a new meeting on this room
- Then the meeting is rejected
-
-
-
-
+    And a resource created
+ When I create a new resource on this room
+ Then the resource is created
  */
 
 var expect = require('chai').expect;
@@ -19,7 +16,7 @@ var config = require('../../config/config.json');
 var helper = require('../../utils/helper.js');
 
 describe('Feature: Resource API', function(){
-    context('Scenario: Create a new REsource on a disabled Room', function(){
+    context('Scenario: Create a new Resource on a disabled Room', function(){
 
         this.slow(config.timeSlow);
         this.timeout(config.timeOut);
