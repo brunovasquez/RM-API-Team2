@@ -3,6 +3,7 @@ var request = require('../../lib/RequestManager/manager.js');
 var generator = require('../../utils/generator.js');
 var dbQuery = require('../../lib/Conditions/dbQuery.js');
 var config = require('../../config/config.json');
+var helper = require('../../utils/helper.js');
 
 describe("CRUD - Out of Orders - Feature without creating out of order like precondition", function () {
 
@@ -59,14 +60,10 @@ describe("CRUD - Out of Orders - Feature without creating out of order like prec
         it('GET /out-of-orders returns all out of orders', function (done) {
             request.outOfOrders.getOutOfOrders(function (err, res) {
                 var actualResult = res.body;
-                dbQuery.assertion.findAllOutOfOrders(function (resultExpected) {
-                    var totalPresents = 0, present;
-                    actualResult.forEach(element => {
-                        totalPresents += resultExpected.filter(dbElement => element._id == dbElement._id &&
-                        element.roomId == dbElement.roomId &&
-                        element.title == dbElement.title &&
-                        element.from == new Date(dbElement.from).toISOString()).length
-                    });
+                dbQuery.assertion.findAllOutOfOrders(function (resultExpec) {
+                    var totalPresents = 0;
+                    var resultExpected = resultExpec;
+                    var totalPresents = helper.compareAllOutOfOrders(actualResult, resultExpected);
                     expect(actualResult.length).to.equal(resultExpected.length);
                     expect(totalPresents).to.equal(resultExpected.length);
                     done();
@@ -80,12 +77,11 @@ describe("CRUD - Out of Orders - Feature without creating out of order like prec
                 dbQuery.assertion.findOutOfOrderById(outOfOrderId, function (resultExpected) {
                     var from = new Date(resultExpected.from);
                     var to = new Date(resultExpected.to);
-                    expect(actualResult._id == resultExpected._id).to.equal(true);
-                    expect(actualResult.roomId == resultExpected.roomId).to.equal(true);
-                    expect(actualResult.title == resultExpected.title).to.equal(true);
-                    expect(actualResult.from == from.toISOString()).to.equal(true);
-                    expect(actualResult.to == to.toISOString()).to.equal(true);
-
+                    expect(actualResult._id.toString()).to.equal(resultExpected._id.toString());
+                    expect(actualResult.roomId.toString()).to.equal(resultExpected.roomId.toString());
+                    expect(actualResult.title.toString()).to.equal(resultExpected.title.toString());
+                    expect(actualResult.from.toString()).to.equal(from.toISOString().toString());
+                    expect(actualResult.to.toString()).to.equal(to.toISOString().toString());
                     done();
                 });
             });
@@ -94,15 +90,9 @@ describe("CRUD - Out of Orders - Feature without creating out of order like prec
         it('GET /services/{:serviceId}/rooms/{:roomId}/out-of-orders returns all out of orders by specific Room and Service', function (done) {
             request.outOfOrders.getOutOfOrderByRoom(serviceId, room_ID, function (err, res) {
                 var actualResult = res.body;
-                dbQuery.assertion.findAllOutOfOrdersByRoom(room_ID, function (resultExpected) {
-                    var totalPresents = 0, present;
-                    actualResult.forEach(element => {
-                        totalPresents += resultExpected.filter(dbElement => element._id == dbElement._id &&
-                        element.roomId == dbElement.roomId &&
-                        element.title == dbElement.title &&
-                        element.from == new Date(dbElement.from).toISOString()).length
-                    });
-
+                dbQuery.assertion.findAllOutOfOrdersByRoom(room_ID, function (resultExpec) {
+                    var resultExpected = resultExpec;
+                    var totalPresents = helper.compareAllOutOfOrders(actualResult, resultExpected);
                     expect(actualResult.length).to.equal(resultExpected.length);
                     expect(totalPresents).to.equal(resultExpected.length);
                     done();
@@ -117,12 +107,11 @@ describe("CRUD - Out of Orders - Feature without creating out of order like prec
                 dbQuery.assertion.findOutOfOrderById(outOfOrderId, function (resultExpected) {
                     var from = new Date(resultExpected.from);
                     var to = new Date(resultExpected.to);
-                    expect(actualResult._id == resultExpected._id).to.equal(true);
-                    expect(actualResult.roomId == resultExpected.roomId).to.equal(true);
-                    expect(actualResult.title == resultExpected.title).to.equal(true);
-                    expect(actualResult.from == from.toISOString()).to.equal(true);
-                    expect(actualResult.to == to.toISOString()).to.equal(true);
-
+                    expect(actualResult._id.toString()).to.equal(resultExpected._id.toString());
+                    expect(actualResult.roomId.toString()).to.equal(resultExpected.roomId.toString());
+                    expect(actualResult.title.toString()).to.equal(resultExpected.title.toString());
+                    expect(actualResult.from.toString()).to.equal(from.toISOString().toString());
+                    expect(actualResult.to.toString()).to.equal(to.toISOString().toString());
                     done();
                 });
             });
@@ -137,11 +126,11 @@ describe("CRUD - Out of Orders - Feature without creating out of order like prec
                 dbQuery.assertion.findOutOfOrderById(outOfOrderId, function (resultExpected) {
                     var from = new Date(resultExpected.from);
                     var to = new Date(resultExpected.to);
-                    expect(actualResult._id == resultExpected._id).to.equal(true);
-                    expect(actualResult.roomId == resultExpected.roomId).to.equal(true);
-                    expect(actualResult.title == outOfOrderBody.title).to.equal(true);
-                    expect(actualResult.from == from.toISOString()).to.equal(true);
-                    expect(actualResult.to == to.toISOString()).to.equal(true);
+                    expect(actualResult._id.toString()).to.equal(resultExpected._id.toString());
+                    expect(actualResult.roomId.toString()).to.equal(resultExpected.roomId.toString());
+                    expect(actualResult.title.toString()).to.equal(outOfOrderBody.title.toString());
+                    expect(actualResult.from.toString()).to.equal(from.toISOString().toString());
+                    expect(actualResult.to.toString()).to.equal(to.toISOString().toString());
                     done();
                 });
             });
