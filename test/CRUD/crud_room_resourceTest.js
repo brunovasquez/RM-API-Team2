@@ -81,4 +81,11 @@ describe("CRUD - Room Resources Service", function () {
             done();
         });
     });
+    after(function (done) {
+        if (roomResourceId !== undefined) {
+            dbQuery.removeResource(roomResourceId, function () {
+                done();
+            });
+        }
+    });
 });
