@@ -9,11 +9,11 @@ describe("CRUD - Room Resources Service", function(){
 
     this.slow(config.timeSlow);
     this.timeout(config.timeOut);
-    var serviceId = null, room_ID = null, room_ID2 = null;
-    var roomResourceId = null, totalResources = 0;
-    var resourceBody = null;
-    var resourceList = null;
-    var resourceJSON = null;
+    var serviceId, room_ID, room_ID2;
+    var roomResourceId, totalResources, resourceId;
+    var resourceBody;
+    var resourceList;
+    var resourceJSON;
 
     before(function(done){
         request.authentication.postLogin(function(err, res){
@@ -54,8 +54,9 @@ describe("CRUD - Room Resources Service", function(){
 
     it('GET /services/{:serviceId}/rooms/{:roomId}/resources/{:roomResourceId} returns a specific resource by room and service Id', function(done){
       request.resource.getResourceByRoomOfService(serviceId, room_ID, roomResourceId, function(err, res){
-            expect(resourceBody.resourceId == res.body.resourceId).to.equal(true);
-            expect(resourceBody.quantity == res.body.quantity).to.equal(true);
+            resourceId =resourceBody._id;
+            expect(resourceBody.resourceId.toString()).to.equal(res.body.resourceId);
+            expect(resourceBody.quantity).to.equal(res.body.quantity.toString());
             done();
         });
     });
@@ -63,8 +64,8 @@ describe("CRUD - Room Resources Service", function(){
     it('PUT /services/{:serviceId}/rooms/{:roomId}/resources/{:roomResourceId} updates a specific resource from a specific room', function(done){
         var quantity = generator.generateCapacity();
         var bodyJSON = {"quantity": quantity};
-        request.resource.putResourceByRoomOfService(serviceId, room_ID, roomResourceId, bodyJSON, function(err, res){
-            var found = helper.compareResourceById(res.body.resources,roomResourceId);
+        request.resource.putResourceByRoomOfService(serviceId, room_ID, resourceId, bodyJSON, function(err, res){
+            var found = helper.compareResourceByResourceId(res.body.resources,roomResourceId);
             expect(found.shift().quantity).to.equal(parseInt(quantity));
             done();
         });

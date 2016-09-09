@@ -56,7 +56,7 @@ describe("CRUD - Room Resources Service", function () {
     it('GET /rooms/{:roomId}/resources/{:roomResourceId} returns a specific resource from a specific room', function (done) {
         request.resource.getResourceByRoomId(room_ID, resourceId, function (err, res) {
             expect(resourceBody.resourceId.toString()).to.equal(res.body.resourceId);
-            expect(resourceBody.quantity).to.equal(res.body.quantity.toString());
+            expect(parseInt(resourceBody.quantity)).to.equal(res.body.quantity);
             done();
         });
     });
