@@ -17,7 +17,7 @@ describe('CRUD: Tests for API-Resources', function () {
         });
     });
 
-    afterEach(function (done) {
+    after(function (done) {
         if (resourceId !== undefined) {
             dbQuery.removeResource(resourceId, function () {
                 done();

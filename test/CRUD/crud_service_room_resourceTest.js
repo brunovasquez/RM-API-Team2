@@ -16,19 +16,6 @@ describe("CRUD - Room Resources Service", function(){
     var resourceList;
     var resourceJSON;
 
-    // before(function(done){
-    //     request.authentication.postLogin(function(err, res){
-    //         dbQuery.preCondition.findAllServices(function(res){
-    //             serviceId = res[0]._id;
-    //             dbQuery.preCondition.findAllRoomsOfOneService(serviceId, function(res){
-    //                 room_ID = res[0]._id;
-    //                 room_ID2 = res[1]._id;
-    //                 done();
-    //             });
-    //         });
-    //     });
-    // });
-
     before(function (done) {
         request.authentication.postLogin(function (err, res) {
             resourceBody = generator.generator_resource.generateResource();
@@ -44,20 +31,6 @@ describe("CRUD - Room Resources Service", function(){
             });
         });
     });
-    // beforeEach(function(done){
-    //     resourceBody = generator.generator_resource.generateResource();
-    //     dbQuery.preCondition.insertResource(resourceBody,function(res){
-    //         roomResourceId = res._id;
-    //         generator.generator_resource.setPropertiesResource(roomResourceId);
-    //         dbQuery.preCondition.addResourceToRoom(room_ID,resourceBody,function(err, res){
-    //             dbQuery.preCondition.findRoom(room_ID,function(res){
-    //                 totalResources = res.resources.length;
-    //                 resourceList = res.resources;
-    //                 done();
-    //             });
-    //         });
-    //     });
-    // });
 
     it('POST /services/{:serviceId}/rooms/{:roomId}/resources associates a resource to a room', function(done){
         resourceJSON = generator.generator_resource.generateResource();
@@ -109,35 +82,11 @@ describe("CRUD - Room Resources Service", function(){
         });
     });
 
-    // it('POST /rooms/{:roomId}/resources associates a resource to a room', function(done){
-    //     var found;
-    //     resourceJSON = generator.generator_resource.generateResource();
-    //     generator.generator_resource.setPropertiesResource(roomResourceId);
-    //     request.resource.postResourceByRoomOfService(resourceJSON, serviceId, room_ID2, function(err, res){
-    //         var resourcesList = res.body.resources;
-    //         (resourcesList instanceof Array)? found = null : resourcesList = [];
-    //         found = helper.compareResourceByResourceId(resourcesList,roomResourceId);
-    //         expect(found.shift().resourceId).to.equal(roomResourceId.toString());
-    //         done();
-    //     });
-    //
-    // });
-
-    afterEach(function(done){
-        if(roomResourceId) {
-            dbQuery.postCondition.removeResourceToRoom(room_ID, roomResourceId, function (re) {
-                dbQuery.postCondition.removeResource(roomResourceId, function (res) {
-                    done();
-                });
+    after(function (done) {
+        if (resourceId !== undefined) {
+            dbQuery.removeResource(resourceId, function () {
+                done();
             });
         }
-        else{
-            done();
-        }
     });
-    // after(function(done){
-    //     dbQuery.postCondition.removeResourceToRoom(room_ID2, roomResourceId, function (err,res) {
-    //         done();
-    //     });
-    // });
 });
