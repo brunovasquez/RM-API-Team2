@@ -9,18 +9,15 @@ describe("CRUD: methods for API-Room", function(){
 
     this.slow(config.timeSlow);
     this.timeout(config.timeOut);
-    var roomID, roomName ;
-    var roomsList;
+    var room;
     var serviceId;
     var roomsServiceListExpected;
     before(function(done){
         request.authentication.postLogin(function(err, res){
             dbQuery.preCondition.findAllServices(function(res){
                 serviceId = res[0]._id;
-                dbQuery.preCondition.findAllRooms(function(res2){
-                    roomsList=res2;
-                    roomID = res2[0]._id;
-                    roomName=res2[0].customDisplayName;
+                dbQuery.preCondition.getRandomRoom(function (res) {
+                    room = res;
                     done();
                 });
             });
@@ -30,25 +27,27 @@ describe("CRUD: methods for API-Room", function(){
 
     it('CRUD - GET /room returns all rooms', function(done){
         request.room.getRoom(function(err, res){
-            expect(res.body.length).to.equal(roomsList.length);
-            done();
+            dbQuery.preCondition.findAllRooms(function(resDb) {
+                expect(res.body.length).to.equal(resDb.length);
+                done();
+            });
         });
     });
 
     it('CRUD - GET /rooms/{:roomId} returns a room', function(done){
-        request.room.getRoomById(roomID, function(err, res){
-            expect(res.body._id).to.equal(roomID.toString());
-            expect(res.body.customDisplayName).to.equal(roomName);
+        request.room.getRoomById(room._id, function(err, res){
+            expect(res.body._id).to.equal(room._id.toString());
+            expect(res.body.customDisplayName).to.equal(room.customDisplayName);
             done();
         });
     });
     
     it('CRUD - PUT /rooms/{:roomId} modifies a specific room', function(done){
         var body = generator.generator_room.generateRoom();
-        roomName=body.customDisplayName;
-        request.room.putRoom(roomID, body, function(err, res){
-            expect(res.body._id).to.equal(roomID.toString());
-            expect(res.body.customDisplayName).to.equal(roomName);
+        room.customDisplayName=body.customDisplayName;
+        request.room.putRoom(room._id, body, function(err, res){
+            expect(res.body._id).to.equal(room._id.toString());
+            expect(res.body.customDisplayName).to.equal(room.customDisplayName);
             done();
         });
     });
@@ -70,7 +69,7 @@ describe("CRUD: methods for API-Room", function(){
         dbQuery.preCondition.findAllRoomsOfOneService(serviceId,function(res){
             var roomServiceId = res[0]._id;
             var roomServiceName = res[0].customDisplayName;
-            request.room.getRoomByService(serviceId, roomID, function(err, res){
+            request.room.getRoomByService(serviceId, room._id, function(err, res){
                 expect(res.body._id).to.equal(roomServiceId.toString());
                 expect(res.body.customDisplayName).to.equal(roomServiceName);
                 done();
