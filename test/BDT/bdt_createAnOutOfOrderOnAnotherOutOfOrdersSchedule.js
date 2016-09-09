@@ -1,6 +1,13 @@
-/**
- * Created by AlvaroDaza on 9/8/2016.
+/*
+ Feature: Out Of Order API
+ Scenario: Create an out of order on another out of order
+ Given a have a room
+ And I have a Service
+ And I create Out of Order
+ When I create another  Out of Order on the other Out Of order schedule
+ Then the second out Of Order is not rejected
  */
+
 var expect = require('chai').expect;
 var request = require('../../lib/RequestManager/manager.js');
 var generator = require('../../utils/generator.js');
