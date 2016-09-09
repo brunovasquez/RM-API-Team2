@@ -17,8 +17,8 @@ var generator = require('../../utils/generator.js');
 var dbQuery = require('../../lib/Conditions/dbQuery.js');
 var config = require('../../config/config.json');
 
-describe('Feature: Resource API', function (done) {
-   context('Scenario: Delete a resource associated to a Room', function (done) {
+describe('Feature: Resource API', function () {
+   context('Scenario: Delete a resource associated to a Room', function () {
 
        this.slow(config.timeSlow);
        this.timeout(config.timeOut);
