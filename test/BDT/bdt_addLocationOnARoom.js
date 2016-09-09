@@ -42,8 +42,8 @@ describe('Feature: Location API', function(){
         });
 
         it('And I have a room',function(done){
-            dbQuery.preCondition.findAllRooms(function(res){
-                roomId = res[0]._id;
+            dbQuery.preCondition.getRandomRoom(function (res) {
+                roomId = res._id;
                 request.room.getRoomById(roomId, function(err, res){
                     expect(res.status).to.equal(config.statusCode.OK);
                     done();
@@ -75,7 +75,6 @@ describe('Feature: Location API', function(){
                     });
                 });
             });
-
         });
 
     });
