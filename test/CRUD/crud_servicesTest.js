@@ -82,7 +82,7 @@ describe('CRUD: methods for API-Services ', function () {
         });
     });
 
-    it('PUT /services/{service type}, returns status code 200', function (done) {
+    it('PUT /services/{service type}, updates the impersonation to enabled', function (done) {
         var body = {impersonate: true};
         request.services.putService(serviceIdPost, body, function (err, res) {
             var actualResult = res.body

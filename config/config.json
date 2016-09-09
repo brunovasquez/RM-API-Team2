@@ -15,7 +15,7 @@
   "typeAuthentication": {"jwt" : "jwt ",
     "basic" : "Basic"},
 
-  "endPoints" : { "publicKey" : "/public-key",
+  "endPoints" : {
     "login" : "/login",
     "serviceTypes" : "/service-types",
     "resources" : "/resources",
