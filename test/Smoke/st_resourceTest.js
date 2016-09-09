@@ -9,7 +9,8 @@ describe("Smoke: Resource test without preconditions", function () {
     var roomResourceId;
     var room_ID;
     var serviceId;
-
+    this.slow(config.timeSlow);
+    this.timeout(config.timeOut);
     before(function (done) {
         request.authentication.postLogin(function (err, res) {
             dbQuery.preCondition.findAllRooms(function (res) {
@@ -36,12 +37,17 @@ describe("Smoke: Resource test without preconditions", function () {
         var resourceBody = generator.generator_resource.generateResource();
         generator.generator_resource.setPropertiesResource(resourceId);
         request.resource.postResourceByRoomId(resourceBody, room_ID, function (err, res) {
-            roomResourceId = res.body.resources.shift()._id;
+            roomResourceId = res.body.resources[0]._id;
             expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
-
+    it('GET /rooms/{:roomId}/resources, returns status code 200', function (done) {
+        request.resource.getResourcesByRoom(room_ID, function (err, res) {
+            expect(res.status).to.equal(config.statusCode.OK);
+            done();
+        });
+    });
     it('DEL /rooms/{:roomId}/resources/{:id}, returns status code 200', function (done) {
         request.resource.delResourceByRoom(room_ID, roomResourceId, function (err, res) {
             expect(res.status).to.equal(config.statusCode.OK);
@@ -53,6 +59,7 @@ describe("Smoke: Resource test without preconditions", function () {
         var body = generator.generator_resource.generateResource();
         generator.generator_resource.setPropertiesResource(resourceId);
         request.resource.postResourceByRoomOfService(body, serviceId, room_ID, function (err, res) {
+            roomResourceId = res.body.resources[0]._id;
             expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
@@ -73,13 +80,13 @@ describe("Smoke: Resource test without preconditions", function () {
             done();
         });
     });
-
-    it('GET /rooms/{:roomId}/resources, returns status code 200', function (done) {
-        request.resource.getResourcesByRoom(room_ID, function (err, res) {
+    it('DEL /services/{:serviceId}/rooms/{:roomId}/resources/{:roomResourceId}, returns status code 200', function (done) {
+        request.resource.delResourceByRoomOfService(serviceId, room_ID, roomResourceId, function (err, res) {
             expect(res.status).to.equal(config.statusCode.OK);
             done();
         });
     });
+
 
     it('PUT /resources/{:id}, returns status code 200', function (done) {
         var body = generator.generator_resource.generateResource();
